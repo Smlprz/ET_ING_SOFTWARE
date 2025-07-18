@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: compra-service
+    runtime: java
+    buildCommand: ./mvnw clean package
+    startCommand: java -jar target/*.jar
+    env: java
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: compra-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        value: tu_usuario
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: compra-db
+          property: password
